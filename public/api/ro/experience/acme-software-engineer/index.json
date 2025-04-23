@@ -1,0 +1,33 @@
+{
+  "data": {
+    "experience/acme-software-engineer": {
+      "title": "Software Engineer",
+      "company": "Acme, Inc.",
+      "location": "Anytown, USA",
+      "period": "2015 - 2018",
+      "body": "<div class=\"ro markdown\">\n  <ul>\n  <li>Developed and maintained web applications for an e-commerce platform serving \nthousands of users.</li>\n  <li>Implemented new features and fixed bugs across the full stack, contributing to \na 20% increase in user satisfaction.</li>\n  <li>Worked closely with senior developers to learn and adopt industry best \npractices in software development.</li>\n</ul>\n\n</div>\n",
+      "assets": {},
+      "_meta": {
+        "identifier": "experience/acme-software-engineer",
+        "type": "experience",
+        "id": "acme-software-engineer",
+        "urls": [
+          "http://localhost:4242/ro/experience/acme-software-engineer/attributes.yml",
+          "http://localhost:4242/ro/experience/acme-software-engineer/body.md"
+        ],
+        "created_at": "2025-04-23 10:52:46 -0700",
+        "updated_at": "2025-04-23 10:53:04 -0700",
+        "rel": {
+          "curr": "experience/acme-software-engineer",
+          "prev": null,
+          "next": "experience/examplecorp-senior-engineer"
+        }
+      }
+    }
+  },
+  "_meta": {
+    "url": "http://localhost:4242/ro",
+    "type": "experience",
+    "id": "acme-software-engineer"
+  }
+}

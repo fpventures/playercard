@@ -1,0 +1,128 @@
+{
+  "data": {
+    "experience/acme-software-engineer": {
+      "title": "Software Engineer",
+      "company": "Acme, Inc.",
+      "location": "Anytown, USA",
+      "period": "2015 - 2018",
+      "body": "<div class=\"ro markdown\">\n  <ul>\n  <li>Developed and maintained web applications for an e-commerce platform serving \nthousands of users.</li>\n  <li>Implemented new features and fixed bugs across the full stack, contributing to \na 20% increase in user satisfaction.</li>\n  <li>Worked closely with senior developers to learn and adopt industry best \npractices in software development.</li>\n</ul>\n\n</div>\n",
+      "assets": {},
+      "_meta": {
+        "identifier": "experience/acme-software-engineer",
+        "type": "experience",
+        "id": "acme-software-engineer",
+        "urls": [
+          "http://localhost:4242/ro/experience/acme-software-engineer/attributes.yml",
+          "http://localhost:4242/ro/experience/acme-software-engineer/body.md"
+        ],
+        "created_at": "2025-04-23 10:52:46 -0700",
+        "updated_at": "2025-04-23 10:53:04 -0700",
+        "rel": {
+          "curr": "experience/acme-software-engineer",
+          "prev": null,
+          "next": "experience/examplecorp-senior-engineer"
+        }
+      }
+    },
+    "experience/examplecorp-senior-engineer": {
+      "title": "Senior Software Engineer",
+      "company": "ExampleCorp",
+      "location": "Anytown, USA",
+      "period": "2018 - 2021",
+      "body": "<div class=\"ro markdown\">\n  <ul>\n  <li>Led a team of 5 engineers to develop scalable web services and refactor legacy \ncode, resulting in a 30% performance improvement.</li>\n  <li>Collaborated with cross-functional teams to define project requirements and \ndeliver features on a bi-weekly sprint cycle.</li>\n  <li>Mentored junior developers and established best practices for code reviews \nand CI/CD pipelines.</li>\n</ul>\n\n</div>\n",
+      "assets": {},
+      "_meta": {
+        "identifier": "experience/examplecorp-senior-engineer",
+        "type": "experience",
+        "id": "examplecorp-senior-engineer",
+        "urls": [
+          "http://localhost:4242/ro/experience/examplecorp-senior-engineer/attributes.yml",
+          "http://localhost:4242/ro/experience/examplecorp-senior-engineer/body.md"
+        ],
+        "created_at": "2025-04-23 10:53:33 -0700",
+        "updated_at": "2025-04-23 10:53:58 -0700",
+        "rel": {
+          "curr": "experience/examplecorp-senior-engineer",
+          "prev": "experience/acme-software-engineer",
+          "next": "pages/about"
+        }
+      }
+    },
+    "pages/about": {
+      "name": "John Doe",
+      "role": "Full Stack Developer",
+      "email": "john.doe@example.com",
+      "location": "Anytown, USA",
+      "body": "<div class=\"ro markdown\">\n  <p>John is a passionate software developer with over 10 years of experience building \nweb applications. He specializes in creating clean, efficient code and is always \neager to learn new technologies and improve his craft.</p>\n\n<p>Outside of work, John enjoys contributing to open source projects and exploring \nnew programming languages. He believes in continuous learning and often writes \nabout technology on his personal blog.</p>\n\n</div>\n",
+      "assets": {},
+      "_meta": {
+        "identifier": "pages/about",
+        "type": "pages",
+        "id": "about",
+        "urls": [
+          "http://localhost:4242/ro/pages/about/attributes.yml",
+          "http://localhost:4242/ro/pages/about/body.md"
+        ],
+        "created_at": "2025-04-23 10:51:32 -0700",
+        "updated_at": "2025-04-23 10:51:48 -0700",
+        "rel": {
+          "curr": "pages/about",
+          "prev": "experience/examplecorp-senior-engineer",
+          "next": "projects/analytics-dashboard"
+        }
+      }
+    },
+    "projects/analytics-dashboard": {
+      "name": "E-commerce Analytics Dashboard",
+      "year": 2021,
+      "body": "<div class=\"ro markdown\">\n  <p>Developed a data visualization dashboard for e-commerce analytics, allowing \nnon-technical users to gain insights into sales and user behavior. The dashboard \nwas created using vanilla JavaScript for the front-end and integrated with a \nRESTful API for data retrieval.</p>\n\n</div>\n",
+      "assets": {},
+      "_meta": {
+        "identifier": "projects/analytics-dashboard",
+        "type": "projects",
+        "id": "analytics-dashboard",
+        "urls": [
+          "http://localhost:4242/ro/projects/analytics-dashboard/attributes.yml",
+          "http://localhost:4242/ro/projects/analytics-dashboard/body.md"
+        ],
+        "created_at": "2025-04-23 10:54:54 -0700",
+        "updated_at": "2025-04-23 10:55:14 -0700",
+        "rel": {
+          "curr": "projects/analytics-dashboard",
+          "prev": "pages/about",
+          "next": "projects/personal-portfolio"
+        }
+      }
+    },
+    "projects/personal-portfolio": {
+      "name": "Personal Portfolio Website",
+      "year": 2022,
+      "body": "<div class=\"ro markdown\">\n  <p>A personal website to showcase my projects and blog posts. Built with HTML, CSS, \nand JavaScript to ensure fast performance and easy maintenance. The site is fully \nresponsive and features a contact form integration.</p>\n\n</div>\n",
+      "assets": {},
+      "_meta": {
+        "identifier": "projects/personal-portfolio",
+        "type": "projects",
+        "id": "personal-portfolio",
+        "urls": [
+          "http://localhost:4242/ro/projects/personal-portfolio/attributes.yml",
+          "http://localhost:4242/ro/projects/personal-portfolio/body.md"
+        ],
+        "created_at": "2025-04-23 10:55:39 -0700",
+        "updated_at": "2025-04-23 10:55:49 -0700",
+        "rel": {
+          "curr": "projects/personal-portfolio",
+          "prev": "projects/analytics-dashboard",
+          "next": null
+        }
+      }
+    }
+  },
+  "_meta": {
+    "url": "http://localhost:4242/ro",
+    "types": [
+      "experience",
+      "pages",
+      "projects"
+    ]
+  }
+}

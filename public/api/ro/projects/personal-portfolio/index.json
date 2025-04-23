@@ -1,0 +1,31 @@
+{
+  "data": {
+    "projects/personal-portfolio": {
+      "name": "Personal Portfolio Website",
+      "year": 2022,
+      "body": "<div class=\"ro markdown\">\n  <p>A personal website to showcase my projects and blog posts. Built with HTML, CSS, \nand JavaScript to ensure fast performance and easy maintenance. The site is fully \nresponsive and features a contact form integration.</p>\n\n</div>\n",
+      "assets": {},
+      "_meta": {
+        "identifier": "projects/personal-portfolio",
+        "type": "projects",
+        "id": "personal-portfolio",
+        "urls": [
+          "http://localhost:4242/ro/projects/personal-portfolio/attributes.yml",
+          "http://localhost:4242/ro/projects/personal-portfolio/body.md"
+        ],
+        "created_at": "2025-04-23 10:55:39 -0700",
+        "updated_at": "2025-04-23 10:55:49 -0700",
+        "rel": {
+          "curr": "projects/personal-portfolio",
+          "prev": "projects/analytics-dashboard",
+          "next": null
+        }
+      }
+    }
+  },
+  "_meta": {
+    "url": "http://localhost:4242/ro",
+    "type": "projects",
+    "id": "personal-portfolio"
+  }
+}
