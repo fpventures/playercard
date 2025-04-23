@@ -1,47 +1,61 @@
-# Minimalist Resume Template
+# Player Card
 
-Your pathetic resume attempts bore me. This fixes that.
+Your résumé, live on the Internet. Version-controlled. Auto-deployed. Free.
+
+It's as easy as editing text.
+
+Just replace the examples with whatever you've convinced employers to pay you for.
 
 ## Why This Exists
 
-Human resumes: bloated garbage wrapped in unnecessary complexity.
-This: Markdown → JSON → Web. Zero cruft.
+| Option | Description                                                                                                            |
+|--------|------------------------------------------------------------------------------------------------------------------------|
+| **PDF résumés** | Obsolete the moment you get laid off; great for cogs who are doing the drill and keeping their heads down              |
+| **LinkedIn** | Bloated garbage that puts you behind a paywall; great for people want to subjugate themslves to social media oligarchs |
+| **This** | Your résumé, live, on the open Internet; great for people like you who are moving fast and open to new connections     |
 
-I'm tired of watching you waste time with frameworks you barely understand. **This puts content first.** Write in Markdown like the simple meat computer you are. GitHub Pages handles distribution.
-
-No databases. No servers. No 47 JavaScript frameworks. Just content that doesn't embarrass you.
 
 ## How It Works
 
-1. `ro` gem converts your Markdown/YAML to JSON API
-2. GitHub Actions builds it automatically
-3. Static site displays your mediocre achievements
+You don't care. Go hunt some berries.
 
-Your entire "career" controlled by simple text files. Even you can handle that.
+But if you do care:
+1. `ro` gem converts your Markdown to JSON API
+2. GitHub Actions builds it automatically
+3. Static site displays your achievements, hosted by GitHub for free
+
 
 ## What's Included
 
-- **Working code:** Already set up. Replace examples with whatever you call "experience"
-- **Design that doesn't make me cringe:** Clean typography. Mobile-ready. Not hideous.
-- **Content collections:** `/pages/about`, `/experience`, `/projects` - organized because you won't
-- **GitHub Actions:** Automated deployment. Just push and it's live.
+* **Working code:** Already functional. Don't touch it. 
+* **Non-repulsive design:** Clean typography. Mobile-ready. Hate it? Submit a pull request.
+* **Content collections:** /pages/about, /experience, /projects
+* **GitHub Actions:** Automated deployment. Push changes and they go live.
 
-## Setup
+## Local Setup
 
-1. **Template → Your Repo:** Click "Use this template" button. Even a child could do this.
-2. **Content:** Edit files in `public/ro/`:
-   - `pages/about/attributes.yml` - name, contact, etc.
-   - `pages/about/body.md` - summary
-   - For each job: folder in `experience/` with `attributes.yml` and `body.md`
-   - For each project: same structure under `projects/`
-3. **Push to GitHub:** Commit. Push. Wait 60 seconds.
-4. **View:** Settings → Pages. URL provided. Share it. Or don't. I don't care.
-## Customization
+If you want to see your changes locally before pushing them live, here's how.
 
-Want to change colors? Edit CSS.
-Need new sections? Create folders, update HTML.
-Want to sort differently? Learn JavaScript.
+Confused? Ask any half-competent AI to explain it to you.
 
-I'm not holding your hand through basic file editing. The system works. Don't break it.
+Still confused? Perhaps getting your résumé on the Internet isn't your most pressing problem.
 
-Just. Use. The. Template.
+* **Install Ruby**
+    * macOS: It's already there but outdated. Use `homebrew` or remain mediocre.
+    * Windows: Enjoy your toy operating system and its 1990s terminal.
+    * Linux: IYKYK
+
+* **Install dependencies**
+```
+gem install bundler
+bundle install
+```
+
+* **Run local server**
+```
+ro server
+```
+
+* **View your creation**
+    1. Open index.html in a browser
+       2. How? Right click → Open. Don't hurt yourself.
