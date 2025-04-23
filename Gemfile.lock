@@ -1,0 +1,55 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    front_matter_parser (1.0.1)
+    image_size (3.4.0)
+    kramdown (2.5.1)
+      rexml (>= 3.3.9)
+    kramdown-parser-gfm (1.1.0)
+      kramdown (~> 2.0)
+    map (6.6.0)
+    nokogiri (1.18.8-aarch64-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.8-aarch64-linux-musl)
+      racc (~> 1.4)
+    nokogiri (1.18.8-arm-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.8-arm-linux-musl)
+      racc (~> 1.4)
+    nokogiri (1.18.8-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.18.8-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.18.8-x86_64-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.8-x86_64-linux-musl)
+      racc (~> 1.4)
+    racc (1.8.1)
+    rexml (3.4.1)
+    rinku (2.0.6)
+    ro (4.4.0)
+      front_matter_parser (~> 1.0)
+      image_size (~> 3.4)
+      kramdown (~> 2.4, >= 2.4.0)
+      kramdown-parser-gfm (~> 1.1, >= 1.1.0)
+      map (~> 6.6, >= 6.6.0)
+      nokogiri (~> 1)
+      rinku (~> 2.0)
+      rouge (~> 4.1, >= 4.1.1)
+    rouge (4.5.1)
+
+PLATFORMS
+  aarch64-linux-gnu
+  aarch64-linux-musl
+  arm-linux-gnu
+  arm-linux-musl
+  arm64-darwin
+  x86_64-darwin
+  x86_64-linux-gnu
+  x86_64-linux-musl
+
+DEPENDENCIES
+  ro
+
+BUNDLED WITH
+   2.6.8

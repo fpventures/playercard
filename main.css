@@ -1,0 +1,87 @@
+/* Base styles */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #333;
+  line-height: 1.6;
+  background: #fff;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Header and Intro */
+header h1 {
+  margin: 0 0 0.2em 0;
+  font-size: 2em;
+}
+
+header #role {
+  margin: 0 0 0.5em 0;
+  font-size: 1.1em;
+  color: #555;
+}
+
+header #contact {
+  margin: 0 0 1.5em 0;
+  font-size: 0.9em;
+  color: #555;
+}
+
+.back-link {
+  margin: 0 0 1.5em 0;
+}
+
+.back-link a {
+  text-decoration: none;
+  font-size: 0.9em;
+  color: #0366d6;
+}
+
+/* Section Headings */
+h2 {
+  font-size: 1.5em;
+  margin: 2em 0 0.5em 0;
+  color: #222;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.2em;
+}
+
+/* Experience & Projects Lists */
+.experience-item, .project-item {
+  margin-bottom: 1.5em;
+}
+
+.experience-item h3, .project-item h3 {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+.experience-item .meta, .project-item .meta {
+  font-size: 0.9em;
+  color: #555;
+  margin: 0.2em 0 0.5em 0;
+}
+
+.year {
+  font-size: 0.9em;
+  color: #555;
+  font-style: italic;
+}
+
+/* Content formatting */
+ul {
+  margin: 0 0 1em 1.2em;
+}
+
+a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
