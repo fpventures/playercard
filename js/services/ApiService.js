@@ -1,9 +1,10 @@
 // ApiService.js - Handles API communications
+import { getBaseUrl } from '../config.js';
 
 export default class ApiService {
     constructor() {
         // Set base URL and API paths based on environment
-        this.baseUrl = 'http://localhost:4242/';
+        this.baseUrl = getBaseUrl();
         this.apiPrefix = 'ro/';
         this.apiBase = this.baseUrl + this.apiPrefix;
     }
