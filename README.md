@@ -17,29 +17,41 @@ Just replace the examples with whatever you've convinced employers to pay you fo
 
 ## How It Works
 
+You don't care. Go hunt berries.
 
-
-## What's Included
-
-You don't care. Go hunt some berries.
-
-But if you do care:
+Still here, really? Ok, the TL;DR is:
 
 1. The [magnificent `ro` gem](https://github.com/ahoward/ro) converts your Markdown to JSON API
 2. GitHub Actions deploy it automatically
 3. Static api backend with a zero-dependency html/css/js frontend
-4. Meaning: Résumé website that displays your achievements, hosted on GitHub Pages for free
+
+
+## What It Is
+
+Your résumé on the wide open Internet. Free as in beer. Free as in freedom.
 
 
 ## Getting Started
 
-1.	Fork this repo via `Use this template → Create new repository`
-2.	In your new repo’s `Settings → Pages`, pick your branch (e.g. main) and folder (/), then `Save`.
-3.	Visit https://<your-username>.github.io/<your-repo>/ to see your live résumé.
+1. Hit "Use this template" to create your own copy of this repo.
+2. Go to your new repo’s Settings → Pages and choose GitHub Actions as the source.
+3. Your résumé site will be live at https://<your-username>.github.io/<your-repo>/
+
+## Making It Your Own
+
+Write about yourself.
+
+- Edit the files in `public/ro` to reflect your experience, personal details, and projects.
+  - You can add or remove files in those directories.
+  - Just follow the format of the examples.
+- Commit your changes and push them to GitHub
+- 10 seconds later, visit `https://<your-username>.github.io/<your-repo>/`
+
+> Note: Do not edit files in `public/api`. Those are automatically generated.
 
 ## Local Setup
 
-If you want to see your changes locally before pushing them live, here's how.
+If you must see your changes locally before pushing them live:
 
 * **Install Ruby**
     * macOS: It's already there but outdated. Use `homebrew` or remain mediocre.
@@ -63,4 +75,4 @@ bin/dev
 ## That's all
 Confused? Ask any half-competent AI to explain it to you.
 
-Still confused? [Visit us](https://www.fastpack.ventures) for a consultation.
+Still confused? [Hire us](https://www.fastpack.ventures) for a consultation.
