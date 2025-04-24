@@ -43,6 +43,32 @@ server = WEBrick::HTTPServer.new(
   end
 end
 
+# Serve files from js/ directory, excluding README.md
+server.mount_proc '/js' do |req, res|
+  # Extract the path after /js
+  path = req.path.gsub(/^\/js\/?/, '')
+  file_path = "#{Dir.pwd}/js/#{path}"
+
+  # Skip README.md file
+  if path.downcase == 'readme.md'
+    res.status = 404
+    next
+  end
+
+  if File.exist?(file_path) && !File.directory?(file_path)
+    res.body = File.read(file_path)
+    res.content_type = case File.extname(file_path)
+      when '.js' then 'application/javascript'
+      when '.json' then 'application/json'
+      else WEBrick::HTTPUtils.mime_type(file_path, WEBrick::HTTPUtils::DefaultMimeTypes)
+    end
+    # Apply no-cache headers
+    no_cache_headers.each { |k, v| res[k] = v }
+  else
+    res.status = 404
+  end
+end
+
 # Serve files from public/api/ro/** as ro/**
 server.mount_proc '/ro' do |req, res|
   # Extract the path after /ro
@@ -75,6 +101,7 @@ end
 puts "Development servers running:"
 puts "- WEBrick server: http://localhost:4242"
 puts "  - Serves /index.html, /script.js, and /main.css from root"
+puts "  - Serves /js/**/* from js/ directory (excluding README.md)"
 puts "  - Serves public/api/ro/**/* as ro/**/*"
 puts "  - No caching enabled"
 puts "- 'ro watch' process running concurrently"
