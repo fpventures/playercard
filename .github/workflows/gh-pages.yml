@@ -1,18 +1,21 @@
+# .github/workflows/pages-deploy.yml
 name: Deploy to GitHub Pages
 
+# Trigger on pushes to main and on manual dispatch
 on:
   push:
-    branches: ["main"]
+    branches: [ "main" ]
   workflow_dispatch:
+
+# Grant pages:write and id-token:write globally so both jobs can deploy
+permissions:
+  contents: read    # (default) allow reading the repo
+  pages: write      # allow publishing to Pages
+  id-token: write   # allow OIDC if needed
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: read    # read the repository
-      pages: write      # allow configure-pages to call the Pages API
-      id-token: write   # for OIDC (if needed)
 
     steps:
       - name: Checkout repository (with LFS)
@@ -38,12 +41,6 @@ jobs:
           cp main.css public/
           cp -R js/ public/
 
-      - name: Configure GitHub Pages
-        id: pages
-        uses: actions/configure-pages@v5.0.0
-        with:
-          enablement: true   # set to true only on first run to auto-enable Pages
-
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -52,12 +49,6 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
