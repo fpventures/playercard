@@ -1,4 +1,5 @@
 name: Deploy to GitHub Pages
+
 on:
   push:
     branches: [ "main" ]
@@ -7,53 +8,53 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository (with LFS)
         uses: actions/checkout@v4
         with:
-          lfs: true  # Fetch Git LFS files as well [oai_citation:10‡github.com](https://github.com/nschloe/action-cached-lfs-checkout#:~:text=,actions%2Fcheckout%40v4%20with%3A%20lfs%3A%20true)
+          lfs: true
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.2"         # Use Ruby 3.2 (or the required version for 'ro')
-          bundler-cache: true         # Install dependencies and cache them [oai_citation:11‡github.com](https://github.com/ruby/setup-ruby#:~:text=Note%20that%20any%20step%20doing,cache%3A%20true)
+          ruby-version: "3.2"
+          bundler-cache: true
 
-      - name: Build site with 'ro'
-        run: bundle exec ro build     # Run the Ruby-based generator to produce site files
+      - name: Build site with ro
+        run: |
+          bundle exec ro build public/ro public/api/ro
+          bundle exec ro site public
 
-      - name: Copy static files to public/
+      - name: Copy extra static files
         run: |
           mkdir -p public
           cp index.html public/
           cp main.css public/
-          cp -R js public/
+          cp -R js/ public/
 
       - name: Configure GitHub Pages
-        id: pages                     # Step ID for later use (if needed)
-        uses: actions/configure-pages@v5 [oai_citation:12‡docs.github.com](https://docs.github.com/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages#:~:text=,pages%40v5)
+        id: pages
+        uses: actions/configure-pages@v5.0.0  # explicit, exact tag to avoid missing download error
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: public                # Upload the generated site in 'public' directory [oai_citation:13‡docs.github.com](https://docs.github.com/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages#:~:text=,artifact%40v3)
+          path: public
 
   deploy:
-    # Ensure the deployment job only runs after the build job completes successfully
     needs: build
     runs-on: ubuntu-latest
-
-    # Permissions needed for GitHub Pages deployment (write access and OIDC token) [oai_citation:14‡docs.github.com](https://docs.github.com/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages#:~:text=,field)
     permissions:
-      contents: read      # read repository content (default for Actions)
-      pages: write        # publish to Pages
-      id-token: write     # authentication token for deployment
+      contents: read
+      pages: write
+      id-token: write
 
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}  # URL of the deployed site [oai_citation:15‡docs.github.com](https://docs.github.com/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages#:~:text=runs,pages%20url%3A%20%24%7B%7Bsteps.deployment.outputs.page_url)
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4  # Publishes the artifact to GitHub Pages [oai_citation:16‡docs.github.com](https://docs.github.com/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages#:~:text=,pages%40v4)
+        uses: actions/deploy-pages@v4.0.0  # pin to the released v4.0.0 version
