@@ -1,31 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Resume</title>
-  <link rel="stylesheet" href="main.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional Portfolio</title>
+  <link rel="stylesheet" href="main.css">
 </head>
-<body id="index-page">
-  <div class="container">
-    <header>
-      <h1 id="name"></h1>
-      <p id="role"></p>
-      <p id="contact"></p>
-    </header>
+<body>
+<main class="container">
+  <section id="about" aria-label="About">
+    <div class="loading" id="about-loading">
+      <div class="skeleton skeleton-title"></div>
+      <div class="skeleton skeleton-card"></div>
+    </div>
+  </section>
 
-    <p id="about-summary"></p>
+  <div class="separator"></div>
 
-    <section id="experience">
-      <h2>Experience</h2>
-      <div id="experience-list"></div>
-    </section>
+  <section id="experience" aria-label="Experience">
+    <div class="loading" id="experience-loading">
+      <div class="skeleton skeleton-title"></div>
+      <div class="skeleton skeleton-card"></div>
+      <div class="skeleton skeleton-card"></div>
+    </div>
+  </section>
 
-    <section id="projects">
-      <h2>Projects</h2>
-      <div id="projects-list"></div>
-    </section>
-  </div>
-  <script src="script.js"></script>
+  <div class="separator"></div>
+
+  <section id="projects" aria-label="Projects">
+    <div class="loading" id="projects-loading">
+      <div class="skeleton skeleton-title"></div>
+      <div class="skeleton skeleton-card"></div>
+      <div class="skeleton skeleton-card"></div>
+    </div>
+  </section>
+</main>
+
+<button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sun-icon">
+    <circle cx="12" cy="12" r="4"></circle>
+    <path d="M12 2v2"></path>
+    <path d="M12 20v2"></path>
+    <path d="m4.93 4.93 1.41 1.41"></path>
+    <path d="m17.66 17.66 1.41 1.41"></path>
+    <path d="M2 12h2"></path>
+    <path d="M20 12h2"></path>
+    <path d="m6.34 17.66-1.41 1.41"></path>
+    <path d="m19.07 4.93-1.41 1.41"></path>
+  </svg>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="moon-icon" style="display: none;">
+    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+  </svg>
+</button>
+
+<script src="script.js"></script>
 </body>
 </html>

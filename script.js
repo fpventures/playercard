@@ -1,107 +1,192 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Determine if we're running on a local file
-    const isLocalFile = window.location.protocol === 'file:';
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    const sunIcon = document.querySelector('.sun-icon');
+    const moonIcon = document.querySelector('.moon-icon');
+
+    // Check for saved theme preference or use system preference
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const savedTheme = localStorage.getItem('theme');
+
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        document.body.classList.add('dark');
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+    }
+
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark');
+        const isDark = document.body.classList.contains('dark');
+
+        if (isDark) {
+            sunIcon.style.display = 'none';
+            moonIcon.style.display = 'block';
+            localStorage.setItem('theme', 'dark');
+        } else {
+            sunIcon.style.display = 'block';
+            moonIcon.style.display = 'none';
+            localStorage.setItem('theme', 'light');
+        }
+    });
 
     // Set base URL and API paths based on environment
     let baseUrl = 'http://localhost:4242/';
     let apiPrefix = 'ro/';
-    let apiBase = baseUrl + apiPrefix
+    let apiBase = baseUrl + apiPrefix;
 
-    // Fetch the "About" page data for name, role, and about content
-    fetch(apiBase + 'pages/about/index.json')
-        .then(response => response.json())
-        .then(data => {
-            // Populate name, role, and contact information
-            document.getElementById('name').textContent = data.name;
-            document.getElementById('role').textContent = data.role;
-            document.getElementById('contact').innerHTML =
-                `${data.location} | <a href="mailto:${data.email}">${data.email}</a>`;
-            // Set page title dynamically
-            document.title = `${data.name} - Resume`;
-            if (document.body.id === 'index-page') {
-                // On home page: show first paragraph of about content as summary
-                let summaryHTML = '';
-                if (data.body) {
-                    const endIdx = data.body.indexOf('</p>');
-                    summaryHTML = endIdx !== -1 ? data.body.substring(0, endIdx + 4) : data.body;
-                }
-                summaryHTML += ' <a href="about.html">Read more &raquo;</a>';
-                document.getElementById('about-summary').innerHTML = summaryHTML;
-            } else if (document.body.id === 'about-page') {
-                // On about page: display the full about content
-                document.getElementById('about-content').innerHTML = data.body;
+    // Fetch portfolio data
+    async function fetchPortfolioData() {
+        try {
+            const response = await fetch(apiBase + 'index.json');
+            if (!response.ok) {
+                throw new Error('Failed to fetch portfolio data');
             }
-        })
-        .catch(error => {
-            console.error('Error fetching about data:', error);
-            document.getElementById('about-summary') && (document.getElementById('about-summary').innerHTML =
-                '<p>Error loading content. Please ensure the local server is running at <code>http://localhost:4242</code></p>');
-            document.getElementById('about-content') && (document.getElementById('about-content').innerHTML =
-                '<p>Error loading content. Please ensure the local server is running at <code>http://localhost:4242</code></p>');
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching portfolio data:', error);
+            return null;
+        }
+    }
+
+    // Render about section
+    function renderAboutSection(data) {
+        const aboutSection = document.getElementById('about');
+        const aboutLoading = document.getElementById('about-loading');
+
+        if (!aboutSection || !aboutLoading) return;
+
+        // Get the about data from the correct path in the JSON structure
+        const aboutPage = data?.data?.['pages/about'];
+
+        if (!aboutPage) {
+            aboutSection.innerHTML = '<p>About information not available.</p>';
+            return;
+        }
+
+        const aboutHTML = `
+            <div class="header">
+                <div>
+                    <h1>${aboutPage.name}</h1>
+                    <p class="role">${aboutPage.role}</p>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                        </svg>
+                        <a href="mailto:${aboutPage.email}">${aboutPage.email}</a>
+                    </div>
+                    <div class="contact-item">
+                        <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <span>${aboutPage.location}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="prose">${aboutPage.body}</div>
+        `;
+
+        aboutSection.innerHTML = aboutHTML;
+        aboutLoading.style.display = 'none';
+    }
+
+    // Render experience section
+    function renderExperienceSection(data) {
+        const experienceSection = document.getElementById('experience');
+        const experienceLoading = document.getElementById('experience-loading');
+
+        // Extract experience data from the correct structure
+        const experienceEntries = Object.entries(data?.data || {})
+            .filter(([key]) => key.startsWith('experience/'))
+            .map(([_, value]) => value);
+
+        if (experienceEntries.length === 0) {
+            experienceSection.innerHTML = '<p>No experience information available.</p>';
+            return;
+        }
+
+        let experienceHTML = '<h2>Experience</h2><div class="experience-list">';
+
+        experienceEntries.forEach(exp => {
+            experienceHTML += `
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">${exp.title}</h3>
+                            <p class="card-company">${exp.company} • ${exp.location}</p>
+                            <p class="card-period">${exp.period}</p>
+                        </div>
+                    </div>
+                    <div class="prose">${exp.body}</div>
+                </div>
+            `;
         });
 
-    // Fetch and display Experience items
-    fetch(apiBase + 'experience/index.json')
-        .then(response => response.json())
-        .then(list => {
-            const items = Array.isArray(list) ? list : (list.items || list.experience || []);
-            items.forEach(item => {
-                const expDiv = document.createElement('div');
-                expDiv.className = 'experience-item';
-                // Job title and company
-                const title = document.createElement('h3');
-                title.textContent = `${item.title} at ${item.company}`;
-                expDiv.appendChild(title);
-                // Period and location
-                const meta = document.createElement('p');
-                meta.className = 'meta';
-                meta.textContent = `${item.period} | ${item.location}`;
-                expDiv.appendChild(meta);
-                // Job details (HTML list from Markdown)
-                const details = document.createElement('div');
-                details.className = 'details';
-                details.innerHTML = item.body;
-                expDiv.appendChild(details);
-                // Append to experience section
-                document.getElementById('experience-list').appendChild(expDiv);
-            });
-        })
-        .catch(error => {
-            console.error('Error fetching experience data:', error);
-            document.getElementById('experience-list') && (document.getElementById('experience-list').innerHTML =
-                '<p>Error loading content. Please ensure the local server is running at <code>http://localhost:4242</code></p>');
+        experienceHTML += '</div>';
+
+        experienceSection.innerHTML = experienceHTML;
+        experienceLoading.style.display = 'none';
+    }
+
+    // Render projects section
+    function renderProjectsSection(data) {
+        const projectsSection = document.getElementById('projects');
+        const projectsLoading = document.getElementById('projects-loading');
+
+        // Extract projects data from the correct structure
+        const projectEntries = Object.entries(data?.data || {})
+            .filter(([key]) => key.startsWith('projects/'))
+            .map(([_, value]) => value);
+        if (projectEntries.length === 0) {
+            projectsSection.innerHTML = '<p>No project information available.</p>';
+            return;
+        }
+
+        let projectsHTML = '<h2>Projects</h2><div class="projects-grid">';
+
+        projectEntries.forEach(project => {
+            projectsHTML += `
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">
+                                ${project.name}
+                                <span class="project-year">${project.year}</span>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="prose">${project.body}</div>
+                </div>
+            `;
         });
 
-    // Fetch and display Projects
-    fetch(apiBase + 'projects/index.json')
-        .then(response => response.json())
-        .then(list => {
-            const items = Array.isArray(list) ? list : (list.items || list.projects || []);
-            items.forEach(item => {
-                const projDiv = document.createElement('div');
-                projDiv.className = 'project-item';
-                // Project name (and year if available)
-                const title = document.createElement('h3');
-                title.textContent = item.name;
-                if (item.year) {
-                    const yearSpan = document.createElement('span');
-                    yearSpan.className = 'year';
-                    yearSpan.textContent = ` (${item.year})`;
-                    title.appendChild(yearSpan);
-                }
-                projDiv.appendChild(title);
-                // Project description (HTML from Markdown)
-                const details = document.createElement('div');
-                details.className = 'details';
-                details.innerHTML = item.body;
-                projDiv.appendChild(details);
-                // Append to projects section
-                document.getElementById('projects-list').appendChild(projDiv);
-            });
-        })
-        .catch(error => {
-            console.error('Error fetching projects data:', error);
-            document.getElementById('projects-list') && (document.getElementById('projects-list').innerHTML =
-                '<p>Error loading content. Please ensure the local server is running at <code>http://localhost:4242</code></p>');
-        });
+        projectsHTML += '</div>';
+
+        projectsSection.innerHTML = projectsHTML;
+        projectsLoading.style.display = 'none';
+    }
+
+    // Initialize the application
+    async function initApp() {
+        const data = await fetchPortfolioData();
+
+        if (data) {
+            renderAboutSection(data);
+            renderExperienceSection(data);
+            renderProjectsSection(data);
+        } else {
+            document.querySelector('main').innerHTML = `
+                <div style="text-align: center; padding: 3rem 1rem;">
+                    <h2>Unable to load portfolio data</h2>
+                    <p>Please check your connection and try again.</p>
+                </div>
+            `;
+        }
+    }
+
+    // Start the app
+    initApp();
 });
