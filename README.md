@@ -35,7 +35,7 @@ Your résumé on the wide open Internet. Free as in beer. Free as in freedom.
 
 1. Hit "Use this template" to create your own copy of this repo.
 2. Go to your new repo’s Settings → Pages and choose GitHub Actions as the source.
-3. Your résumé site will be live at https://<your-username>.github.io/<your-repo>/
+3. Your résumé site will be live at `https://<your-username>.github.io/<your-repo>/`
 
 ## Making It Your Own
 
