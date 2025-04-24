@@ -17,11 +17,13 @@ no_cache_headers = {
 
 # Start WEBrick HTTP server
 puts "Starting WEBrick HTTP server on port 4242..."
+# Create a dummy logger that doesn't log anything
+dummy_logger = WEBrick::Log.new("/dev/null", WEBrick::Log::FATAL)
 server = WEBrick::HTTPServer.new(
   :Port => 4242,
   :DocumentRoot => Dir.pwd,
-  :Logger => WEBrick::Log.new($stderr, WEBrick::Log::INFO),
-  :AccessLog => [[nil, nil]]
+  :Logger => dummy_logger,
+  :AccessLog => []
 )
 
 # Serve index.html, script.js, and main.css from root
