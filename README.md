@@ -75,4 +75,4 @@ bin/dev
 ## That's all
 Confused? Ask any half-competent AI to explain it to you.
 
-Still confused? [Hire us](https://www.fastpack.ventures) for a consultation.
+Still confused? [Hire us](https://fastpack.ventures) for a consultation.
