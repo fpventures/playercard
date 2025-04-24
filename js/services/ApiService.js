@@ -1,12 +1,9 @@
 // ApiService.js - Handles API communications
-import { getBaseUrl } from '../config.js';
+import { getApiBase } from '../config.js';
 
 export default class ApiService {
     constructor() {
-        // Set base URL and API paths based on environment
-        this.baseUrl = getBaseUrl();
-        this.apiPrefix = 'ro/';
-        this.apiBase = this.baseUrl + this.apiPrefix;
+        this.apiBase = getApiBase();
     }
 
     async fetchPortfolioData() {
