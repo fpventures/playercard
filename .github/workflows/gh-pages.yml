@@ -2,12 +2,17 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read    # read the repository
+      pages: write      # allow configure-pages to call the Pages API
+      id-token: write   # for OIDC (if needed)
 
     steps:
       - name: Checkout repository (with LFS)
@@ -35,7 +40,9 @@ jobs:
 
       - name: Configure GitHub Pages
         id: pages
-        uses: actions/configure-pages@v5.0.0  # explicit, exact tag to avoid missing download error
+        uses: actions/configure-pages@v5.0.0
+        with:
+          enablement: true   # set to true only on first run to auto-enable Pages
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
@@ -45,6 +52,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+
     permissions:
       contents: read
       pages: write
@@ -57,4 +65,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4.0.0  # pin to the released v4.0.0 version
+        uses: actions/deploy-pages@v4.0.0
