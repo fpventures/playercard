@@ -17,28 +17,29 @@ Just replace the examples with whatever you've convinced employers to pay you fo
 
 ## How It Works
 
-You don't care. Go hunt some berries.
-
-But if you do care:
-1. `ro` gem converts your Markdown to JSON API
-2. GitHub Actions builds it automatically
-3. Static site displays your achievements, hosted by GitHub for free
 
 
 ## What's Included
 
-* **Working code:** Already functional. Don't touch it. 
-* **Non-repulsive design:** Clean typography. Mobile-ready. Hate it? Submit a pull request.
-* **Content collections:** /pages/about, /experience, /projects
-* **GitHub Actions:** Automated deployment. Push changes and they go live.
+You don't care. Go hunt some berries.
+
+But if you do care:
+
+1. The [magnificent `ro` gem](https://github.com/ahoward/ro) converts your Markdown to JSON API
+2. GitHub Actions deploy it automatically
+3. Static api backend with a zero-dependency html/css/js frontend
+4. Meaning: Résumé website that displays your achievements, hosted on GitHub Pages for free
+
+
+## Getting Started
+
+1.	Fork this repo via `Use this template → Create new repository`
+2.	In your new repo’s `Settings → Pages`, pick your branch (e.g. main) and folder (/), then `Save`.
+3.	Visit https://<your-username>.github.io/<your-repo>/ to see your live résumé.
 
 ## Local Setup
 
 If you want to see your changes locally before pushing them live, here's how.
-
-Confused? Ask any half-competent AI to explain it to you.
-
-Still confused? Perhaps getting your résumé on the Internet isn't your most pressing problem.
 
 * **Install Ruby**
     * macOS: It's already there but outdated. Use `homebrew` or remain mediocre.
@@ -53,9 +54,13 @@ bundle install
 
 * **Run local server**
 ```
-ro server
+bin/dev
 ```
 
 * **View your creation**
-    1. Open index.html in a browser
-       2. How? Right click → Open. Don't hurt yourself.
+    1. visit http://localhost:4242 in a browser. Don't hurt yourself.
+
+## That's all
+Confused? Ask any half-competent AI to explain it to you.
+
+Still confused? [Visit us](https://www.fastpack.ventures) for a consultation.
