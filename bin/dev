@@ -1,0 +1,84 @@
+#!/usr/bin/env ruby
+
+require 'webrick'
+require 'fileutils'
+require 'open3'
+
+# Start ro watch as a background process
+puts "Starting ro watch..."
+ro_watch = Process.spawn("ro watch")
+
+# Configure server to not cache content
+no_cache_headers = {
+  "Cache-Control" => "no-store, no-cache, must-revalidate, max-age=0",
+  "Pragma" => "no-cache",
+  "Expires" => "0"
+}
+
+# Start WEBrick HTTP server
+puts "Starting WEBrick HTTP server on port 4242..."
+server = WEBrick::HTTPServer.new(
+  :Port => 4242,
+  :DocumentRoot => Dir.pwd,
+  :Logger => WEBrick::Log.new($stderr, WEBrick::Log::INFO),
+  :AccessLog => [[nil, nil]]
+)
+
+# Serve index.html, script.js, and main.css from root
+['index.html', 'script.js', 'main.css'].each do |file|
+  server.mount_proc "/#{file}" do |req, res|
+    file_path = "#{Dir.pwd}/#{file}"
+    if File.exist?(file_path)
+      res.body = File.read(file_path)
+      res.content_type = case File.extname(file)
+        when '.html' then 'text/html'
+        when '.js' then 'application/javascript'
+        when '.css' then 'text/css'
+      end
+      # Apply no-cache headers
+      no_cache_headers.each { |k, v| res[k] = v }
+    else
+      res.status = 404
+    end
+  end
+end
+
+# Serve files from public/api/ro/** as ro/**
+server.mount_proc '/ro' do |req, res|
+  # Extract the path after /ro
+  path = req.path.gsub(/^\/ro\/?/, '')
+  file_path = "#{Dir.pwd}/public/api/ro/#{path}"
+
+  if File.exist?(file_path) && !File.directory?(file_path)
+    res.body = File.read(file_path)
+    res.content_type = WEBrick::HTTPUtils.mime_type(file_path, WEBrick::HTTPUtils::DefaultMimeTypes)
+    # Apply no-cache headers
+    no_cache_headers.each { |k, v| res[k] = v }
+  else
+    res.status = 404
+  end
+end
+
+# Set up graceful shutdown
+trap('INT') do
+  puts "\nShutting down servers..."
+  Process.kill('INT', ro_watch) rescue nil
+  server.shutdown
+end
+
+trap('TERM') do
+  puts "\nShutting down servers..."
+  Process.kill('TERM', ro_watch) rescue nil
+  server.shutdown
+end
+
+puts "Development servers running:"
+puts "- WEBrick server: http://localhost:4242"
+puts "  - Serves /index.html, /script.js, and /main.css from root"
+puts "  - Serves public/api/ro/**/* as ro/**/*"
+puts "  - No caching enabled"
+puts "- 'ro watch' process running concurrently"
+puts "Press Ctrl+C to stop all servers"
+
+# Start the WEBrick server
+server.start

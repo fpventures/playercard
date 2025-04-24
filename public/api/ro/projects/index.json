@@ -10,8 +10,8 @@
         "type": "projects",
         "id": "analytics-dashboard",
         "urls": [
-          "http://localhost:4242/ro/projects/analytics-dashboard/attributes.yml",
-          "http://localhost:4242/ro/projects/analytics-dashboard/body.md"
+          "/ro/projects/analytics-dashboard/attributes.yml",
+          "/ro/projects/analytics-dashboard/body.md"
         ],
         "created_at": "2025-04-23 10:54:54 -0700",
         "updated_at": "2025-04-23 10:55:14 -0700",
@@ -32,8 +32,8 @@
         "type": "projects",
         "id": "personal-portfolio",
         "urls": [
-          "http://localhost:4242/ro/projects/personal-portfolio/attributes.yml",
-          "http://localhost:4242/ro/projects/personal-portfolio/body.md"
+          "/ro/projects/personal-portfolio/attributes.yml",
+          "/ro/projects/personal-portfolio/body.md"
         ],
         "created_at": "2025-04-23 10:55:39 -0700",
         "updated_at": "2025-04-23 10:55:49 -0700",
@@ -46,7 +46,7 @@
     }
   },
   "_meta": {
-    "url": "http://localhost:4242/ro",
+    "url": "/ro",
     "type": "projects"
   }
 }

@@ -12,8 +12,8 @@
         "type": "experience",
         "id": "acme-software-engineer",
         "urls": [
-          "http://localhost:4242/ro/experience/acme-software-engineer/attributes.yml",
-          "http://localhost:4242/ro/experience/acme-software-engineer/body.md"
+          "/ro/experience/acme-software-engineer/attributes.yml",
+          "/ro/experience/acme-software-engineer/body.md"
         ],
         "created_at": "2025-04-23 10:52:46 -0700",
         "updated_at": "2025-04-23 10:53:04 -0700",
@@ -26,7 +26,7 @@
     }
   },
   "_meta": {
-    "url": "http://localhost:4242/ro",
+    "url": "/ro",
     "type": "experience",
     "id": "acme-software-engineer"
   }

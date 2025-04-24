@@ -3,14 +3,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const isLocalFile = window.location.protocol === 'file:';
 
     // Set base URL and API paths based on environment
-    let baseUrl = '';
+    let baseUrl = 'http://localhost:4242/';
     let apiPrefix = 'ro/';
-
-    if (isLocalFile) {
-        // If opened directly as a file, use the local server
-        baseUrl = 'http://localhost:4242/';
-    }
-
     let apiBase = baseUrl + apiPrefix
 
     // Fetch the "About" page data for name, role, and about content
@@ -37,6 +31,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 // On about page: display the full about content
                 document.getElementById('about-content').innerHTML = data.body;
             }
+        })
+        .catch(error => {
+            console.error('Error fetching about data:', error);
+            document.getElementById('about-summary') && (document.getElementById('about-summary').innerHTML =
+                '<p>Error loading content. Please ensure the local server is running at <code>http://localhost:4242</code></p>');
+            document.getElementById('about-content') && (document.getElementById('about-content').innerHTML =
+                '<p>Error loading content. Please ensure the local server is running at <code>http://localhost:4242</code></p>');
         });
 
     // Fetch and display Experience items
@@ -64,6 +65,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Append to experience section
                 document.getElementById('experience-list').appendChild(expDiv);
             });
+        })
+        .catch(error => {
+            console.error('Error fetching experience data:', error);
+            document.getElementById('experience-list') && (document.getElementById('experience-list').innerHTML =
+                '<p>Error loading content. Please ensure the local server is running at <code>http://localhost:4242</code></p>');
         });
 
     // Fetch and display Projects
@@ -92,5 +98,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Append to projects section
                 document.getElementById('projects-list').appendChild(projDiv);
             });
+        })
+        .catch(error => {
+            console.error('Error fetching projects data:', error);
+            document.getElementById('projects-list') && (document.getElementById('projects-list').innerHTML =
+                '<p>Error loading content. Please ensure the local server is running at <code>http://localhost:4242</code></p>');
         });
 });
